@@ -17,14 +17,14 @@ tableData.forEach(sighting =>{
 });
 
 // Filtering Data
-var button = d3.select("#filter-btn");
+var filterButton = d3.select("#filter-btn");
 var datebox = d3.select("#datetime");
 var citybox = d3.select("#city");
 var statebox = d3.select("#state");
 var countrybox = d3.select("#country");
 var shapebox = d3.select("#shape");
 
-button.on("click", function(){
+filterButton.on("click", function(){
     console.log("Filter button clicked");
     tbody.html('');
     var filteredData = tableData;
@@ -98,3 +98,24 @@ function Shape(newData){
     console.log(filteredData);
     return filteredData;
 }
+
+// Resetting Data
+var resetButton = d3.select("#reset-btn");
+
+resetButton.on("click", function(){
+    console.log("Reset button clicked")
+    tbody.html('')
+    tableData.forEach(sighting =>{
+        var row = tbody.append("tr");
+        Object.entries(sighting).forEach(([key, value]) => {
+            // console.log(key,value);
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+    document.getElementById('datetime').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('state').value = '';
+    document.getElementById('country').value = '';
+    document.getElementById('shape').value = '';
+});
